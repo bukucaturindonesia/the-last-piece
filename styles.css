@@ -25,19 +25,21 @@ footer{padding:70px var(--pad) 30px;border-top:1px solid var(--line);background:
 .motion-ready .reveal.is-visible{opacity:1;transform:none}
 
 /* Playful footer mascot: the frog keeps chasing the missing coin. */
-.frog-chase{position:fixed;left:0;right:0;bottom:max(8px,env(safe-area-inset-bottom));height:96px;z-index:32;overflow:hidden;pointer-events:none;contain:layout paint;filter:drop-shadow(0 14px 20px rgba(0,0,0,.52))}
-.frog-chase__runner,.frog-chase__coin-runner{position:absolute;bottom:3px;will-change:transform;animation:chase-across 10s linear infinite}
-.frog-chase__runner{left:-145px;z-index:2}
-.frog-chase__coin-runner{left:-42px;bottom:28px;z-index:1}
-.frog-chase__frog{display:block;width:84px;height:84px;border-radius:24px;object-fit:cover;border:1px solid rgba(255,255,255,.14);box-shadow:0 0 0 3px rgba(155,232,41,.08),0 0 30px rgba(155,232,41,.28);animation:frog-hop .76s cubic-bezier(.45,.05,.55,.95) infinite;transform-origin:50% 100%}
-.frog-chase__shadow,.frog-chase__coin-shadow{position:absolute;left:50%;bottom:-2px;width:58px;height:10px;border-radius:50%;background:rgba(0,0,0,.52);filter:blur(4px);transform:translateX(-50%);animation:shadow-pulse .76s ease-in-out infinite}
-.frog-chase__coin{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:3px solid #ffd85a;background:radial-gradient(circle at 34% 27%,#fff3a5 0 8%,#ffd33e 9% 34%,#f4a914 58%,#9c5a00 100%);box-shadow:inset 0 0 0 3px rgba(117,57,0,.25),0 0 22px rgba(244,185,33,.55);animation:coin-bounce .76s ease-in-out infinite,coin-spin 1.15s linear infinite;color:#513000;font-family:var(--display);font-size:21px;line-height:1}
+.frog-chase{position:fixed;left:0;right:0;bottom:max(4px,env(safe-area-inset-bottom));height:132px;z-index:32;overflow:hidden;pointer-events:none;contain:layout paint;filter:drop-shadow(0 16px 24px rgba(0,0,0,.58))}
+.frog-chase__runner,.frog-chase__coin-runner{position:absolute;will-change:transform;animation:chase-across 11s linear infinite}
+.frog-chase__runner{left:-190px;bottom:12px;z-index:2}
+.frog-chase__coin-runner{left:-38px;bottom:54px;z-index:1}
+.frog-chase__frog-shell{position:relative;width:160px;height:116px;animation:frog-hop-side .86s cubic-bezier(.46,.04,.54,.96) infinite}
+.frog-chase__frog{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 15%;transform:scaleX(-1) rotate(-5deg);transform-origin:50% 100%;filter:saturate(1.08) contrast(1.04) brightness(1.02);border:none;border-radius:42px 52px 28px 34px;background:transparent}
+.frog-chase__shadow,.frog-chase__coin-shadow{position:absolute;left:50%;bottom:-4px;border-radius:50%;background:rgba(0,0,0,.58);filter:blur(5px);transform:translateX(-50%)}
+.frog-chase__shadow{width:98px;height:14px;animation:shadow-pulse .86s ease-in-out infinite}
+.frog-chase__coin{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;border:3px solid #ffe27a;background:radial-gradient(circle at 34% 27%,#fff8c9 0 8%,#ffd84c 9% 34%,#f4b01a 58%,#955400 100%);box-shadow:inset 0 0 0 3px rgba(117,57,0,.22),0 0 24px rgba(244,185,33,.62);animation:coin-bounce .86s ease-in-out infinite,coin-spin 1.3s linear infinite;color:#513000;font-family:var(--display);font-size:24px;line-height:1}
 .frog-chase__coin b{transform:translateY(1px)}
-.frog-chase__coin-shadow{width:30px;height:7px;bottom:-13px;animation-delay:.09s}
-@keyframes chase-across{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(calc(100vw + 260px),0,0)}}
-@keyframes frog-hop{0%,100%{transform:translateY(0) rotate(-2deg) scaleX(1.04) scaleY(.96)}45%{transform:translateY(-25px) rotate(4deg) scaleX(.96) scaleY(1.04)}62%{transform:translateY(-29px) rotate(2deg) scaleX(.98) scaleY(1.02)}}
-@keyframes coin-bounce{0%,100%{translate:0 0}50%{translate:0 -19px}}
+.frog-chase__coin-shadow{width:34px;height:8px;bottom:-14px;animation:shadow-pulse .86s ease-in-out infinite .08s}
+@keyframes chase-across{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(calc(100vw + 300px),0,0)}}
+@keyframes frog-hop-side{0%,100%{transform:translateY(0) rotate(-4deg) translateX(0)}43%{transform:translateY(-32px) rotate(1deg) translateX(6px)}60%{transform:translateY(-36px) rotate(4deg) translateX(12px)}}
+@keyframes coin-bounce{0%,100%{translate:0 0}50%{translate:0 -22px}}
 @keyframes coin-spin{to{rotate:360deg}}
-@keyframes shadow-pulse{0%,100%{transform:translateX(-50%) scaleX(1);opacity:.55}50%{transform:translateX(-50%) scaleX(.55);opacity:.25}}
-@media(max-width:700px){.frog-chase{height:76px;bottom:max(5px,env(safe-area-inset-bottom))}.frog-chase__runner{left:-108px}.frog-chase__coin-runner{left:-32px;bottom:23px}.frog-chase__frog{width:62px;height:62px;border-radius:18px}.frog-chase__coin{width:31px;height:31px;border-width:2px;font-size:16px}.frog-chase__shadow{width:43px}.frog-chase__coin-shadow{width:24px}.frog-chase__runner,.frog-chase__coin-runner{animation-duration:8.5s}}
+@keyframes shadow-pulse{0%,100%{transform:translateX(-50%) scaleX(1);opacity:.58}50%{transform:translateX(-50%) scaleX(.54);opacity:.22}}
+@media(max-width:700px){.frog-chase{height:114px;bottom:max(2px,env(safe-area-inset-bottom))}.frog-chase__runner{left:-138px;bottom:8px}.frog-chase__coin-runner{left:-28px;bottom:44px}.frog-chase__frog-shell{width:116px;height:88px}.frog-chase__coin{width:36px;height:36px;border-width:2px;font-size:18px}.frog-chase__shadow{width:72px;height:11px}.frog-chase__coin-shadow{width:28px;height:7px}.frog-chase__runner,.frog-chase__coin-runner{animation-duration:8.8s}}
 @media(prefers-reduced-motion:reduce){.frog-chase{display:none}.motion-ready .reveal{opacity:1;transform:none}}
