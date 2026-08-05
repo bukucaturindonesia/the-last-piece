@@ -6,7 +6,8 @@
     {"source": "/the-lore", "destination": "/the-lore.html"},
     {"source": "/the-search", "destination": "/the-search.html"},
     {"source": "/roadmap", "destination": "/roadmap.html"},
-    {"source": "/faq", "destination": "/faq.html"}
+    {"source": "/faq", "destination": "/faq.html"},
+    {"source": "/game", "destination": "/game.html"}
   ],
   "headers": [
     {

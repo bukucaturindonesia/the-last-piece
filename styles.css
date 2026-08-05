@@ -337,3 +337,23 @@ main{display:block}
   .hero-signal>div:nth-child(2),.hero-signal>div:nth-child(4){border-right:1px solid var(--piece-line)}
   .hero-signal__contract{border-top:1px solid var(--piece-line)}
 }
+
+/* The Piece Chain homepage teaser */
+.game-teaser{overflow:hidden;border-top:1px solid var(--piece-line);border-bottom:1px solid var(--piece-line);background:linear-gradient(125deg,rgba(23,61,42,.34),rgba(9,11,13,.96) 55%)}
+.game-teaser__layout{display:grid;grid-template-columns:.86fr 1.14fr;gap:clamp(44px,7vw,100px);align-items:center}
+.game-teaser__copy{position:relative;z-index:2}
+.game-teaser__actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:30px}
+.game-teaser__actions>span{color:#747b73;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.game-teaser__visual{position:relative;min-height:430px;border:1px solid rgba(244,185,66,.24);border-radius:30px;overflow:hidden;background:radial-gradient(circle at 62% 44%,rgba(89,185,107,.22),transparent 28%),linear-gradient(145deg,#0d130f,#080a09);box-shadow:0 30px 90px rgba(0,0,0,.42)}
+.game-teaser__visual::before{content:"";position:absolute;inset:0;opacity:.07;background-image:linear-gradient(rgba(255,255,255,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.16) 1px,transparent 1px);background-size:48px 48px}
+.game-teaser__visual img{position:absolute;z-index:3;left:50%;bottom:22px;width:145px;transform:translateX(-50%);filter:drop-shadow(0 20px 40px rgba(0,0,0,.55))}
+.game-teaser__path{position:absolute;z-index:1;left:-8%;right:-8%;top:36%;height:112px;border:34px solid rgba(244,185,66,.08);border-left-color:transparent;border-right-color:transparent;border-radius:50%;transform:rotate(-8deg)}
+.game-teaser__label{position:absolute;z-index:4;left:22px;top:20px;color:var(--piece-gold);font-size:.62rem;font-weight:850;letter-spacing:.17em;text-transform:uppercase}
+.game-teaser__orb{position:absolute;z-index:2;width:48px;height:48px;border:2px solid rgba(255,255,255,.26);border-radius:50%;box-shadow:0 0 26px currentColor,inset 8px 8px 14px rgba(255,255,255,.22),inset -8px -8px 14px rgba(0,0,0,.42)}
+.game-teaser__orb--1{left:10%;top:42%;color:#f4b942;background:#f4b942}
+.game-teaser__orb--2{left:23%;top:32%;color:#59b96b;background:#59b96b}
+.game-teaser__orb--3{right:28%;top:26%;color:#4ba6c8;background:#4ba6c8}
+.game-teaser__orb--4{right:14%;top:38%;color:#c94a32;background:#c94a32}
+.game-teaser__orb--5{right:7%;top:55%;color:#d8d4c8;background:#d8d4c8}
+@media(max-width:980px){.game-teaser__layout{grid-template-columns:1fr}.game-teaser__visual{min-height:380px}}
+@media(max-width:720px){.game-teaser__visual{min-height:310px}.game-teaser__visual img{width:112px}.game-teaser__orb{width:38px;height:38px}.game-teaser__actions{align-items:flex-start;flex-direction:column}}

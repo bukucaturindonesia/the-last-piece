@@ -16,3 +16,9 @@ Static HTML/CSS/JavaScript website prepared for GitHub and Vercel.
 - Contract address: `4ZvfjSV39AV8X56idKU2vA2VEBktXiQ7jyNxjoACpump`
 
 Canonical runtime values are centralised in `script.js` and mirrored in HTML as no-JavaScript fallbacks.
+
+
+## Arcade game
+- Route: `/game`
+- Files: `game.html`, `game.css`, `game.js`
+- Original match-three chain gameplay; no wallet connection or token rewards.

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#090B0D" />
+  <meta name="description" content="Play The Piece Chain, an original arcade game from The Last Piece universe. Break the chain before it reaches the core." />
+  <link rel="canonical" href="https://the-last-piece.vercel.app/game" />
+  <meta property="og:title" content="The Piece Chain — The Last Piece" />
+  <meta property="og:description" content="Break the chain before it reaches the core. An original arcade game from The Last Piece universe." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://the-last-piece.vercel.app/game" />
+  <meta property="og:image" content="https://the-last-piece.vercel.app/brand/open-graph.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>The Piece Chain — The Last Piece</title>
+  <link rel="icon" href="/brand/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32x32.png" />
+  <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+  <link rel="manifest" href="/brand/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/brand/logo-symbol.webp" fetchpriority="high" />
+  <link rel="stylesheet" href="/styles.css?v=20260805-4" />
+  <link rel="stylesheet" href="/game.css?v=20260805-1" />
+  <script src="/script.js?v=20260805-4" defer></script>
+  <script src="/game.js?v=20260805-1" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to game</a>
+  <div class="site-shell">
+    <header class="site-header is-scrolled" data-header>
+      <a class="site-brand" href="/" aria-label="The Last Piece home">
+        <img src="/brand/logo-horizontal-dark.svg" alt="The Last Piece" width="1860" height="379" />
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/#story">Story</a><a href="/#mr-piece">MR. PIECE</a><a href="/#token">Token</a><a href="/the-lore">Lore</a><a href="/game" aria-current="page">Game</a><a href="/#community">Community</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-link" data-official-link="x" href="https://x.com/LastPieceCoinHd" target="_blank" rel="noopener noreferrer" aria-label="Follow The Last Piece on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.39L6.48 22H3.36l7.26-8.3L2.97 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.84h1.73L8.42 4.05H6.56L17.8 19.84Z"/></svg></a>
+        <a class="header-cta" data-official-link="pump" href="https://pump.fun/coin/4ZvfjSV39AV8X56idKU2vA2VEBktXiQ7jyNxjoACpump" target="_blank" rel="noopener noreferrer">Buy $PIECE <span aria-hidden="true">↗</span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation menu"><span></span><span></span></button>
+      </div>
+    </header>
+
+    <nav class="mobile-panel" id="mobile-navigation" aria-label="Mobile navigation" aria-hidden="true">
+      <a href="/#story">Story</a><a href="/#mr-piece">MR. PIECE</a><a href="/#token">Token</a><a href="/the-lore">Lore</a><a href="/game" aria-current="page">Game</a><a href="/#community">Community</a>
+      <div class="mobile-panel__actions"><a class="button button-primary" data-official-link="pump" href="https://pump.fun/coin/4ZvfjSV39AV8X56idKU2vA2VEBktXiQ7jyNxjoACpump" target="_blank" rel="noopener noreferrer">Buy $PIECE ↗</a><a class="button button-ghost" data-official-link="telegram" href="https://t.me/thastpiece" target="_blank" rel="noopener noreferrer">Join Telegram ↗</a></div>
+    </nav>
+
+    <main id="main-content" class="game-main">
+      <section class="game-hero" aria-labelledby="game-title">
+        <div class="game-hero__glow" aria-hidden="true"></div>
+        <div class="game-hero__inner">
+          <div class="game-hero__copy reveal is-visible">
+            <p class="eyebrow">The Last Piece Arcade // 001</p>
+            <h1 id="game-title">Break the <span>piece chain.</span></h1>
+            <p>Match three or more fragments before the chain reaches the core. Every shot changes the timeline.</p>
+            <div class="game-hero__meta" aria-label="Game details">
+              <span><small>Mode</small><strong>Arcade</strong></span>
+              <span><small>Control</small><strong>Tap / Click</strong></span>
+              <span><small>Rewards</small><strong>Score only</strong></span>
+            </div>
+          </div>
+          <div class="game-hero__seal reveal reveal-delay-1 is-visible">
+            <img src="/brand/gold-seal-genesis.webp" alt="The Last Piece Genesis seal" width="2048" height="2048" />
+          </div>
+        </div>
+      </section>
+
+      <section class="game-section" aria-label="The Piece Chain game">
+        <div class="game-shell">
+          <div class="game-toolbar" aria-label="Game status and controls">
+            <div class="game-stat"><small>Score</small><strong data-game-score>0</strong></div>
+            <div class="game-stat"><small>Best</small><strong data-game-best>0</strong></div>
+            <div class="game-stat"><small>Wave</small><strong data-game-wave>1</strong></div>
+            <div class="game-stat"><small>Combo</small><strong data-game-combo>x1</strong></div>
+            <div class="game-controls">
+              <button class="game-control" type="button" data-game-pause disabled>Pause</button>
+              <button class="game-control" type="button" data-game-sound aria-pressed="true">Sound on</button>
+              <button class="game-control game-control--primary" type="button" data-game-start>Start game</button>
+            </div>
+          </div>
+
+          <div class="game-stage" data-game-stage>
+            <canvas id="piece-chain-canvas" width="1200" height="720" aria-label="The Piece Chain arcade game. Aim with your pointer and tap or click to shoot matching fragments." tabindex="0"></canvas>
+            <div class="game-overlay" data-game-overlay>
+              <img src="/brand/logo-symbol.webp" alt="" width="1024" height="1024" aria-hidden="true" />
+              <p class="game-overlay__eyebrow">MR. PIECE NEEDS YOU</p>
+              <h2 data-game-overlay-title>Stop the chain.</h2>
+              <p data-game-overlay-copy>Match three fragments of the same colour before they reach the final core.</p>
+              <button class="button button-primary" type="button" data-game-overlay-action>Start the hunt</button>
+            </div>
+            <p class="sr-only" data-game-live aria-live="polite"></p>
+          </div>
+
+          <div class="game-help">
+            <div><b>01</b><span><strong>Aim</strong><small>Move your pointer or touch the board.</small></span></div>
+            <div><b>02</b><span><strong>Shoot</strong><small>Tap or click to launch a fragment.</small></span></div>
+            <div><b>03</b><span><strong>Match</strong><small>Connect three or more of the same colour.</small></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="game-story" aria-labelledby="game-story-title">
+        <div class="section-inner game-story__layout">
+          <div>
+            <p class="eyebrow">Inside the universe</p>
+            <h2 class="section-heading" id="game-story-title">Every chain wants the <span>final piece.</span></h2>
+          </div>
+          <div class="game-story__copy">
+            <p>The chain is closing in on the core. MR. PIECE cannot carry the final fragment and defend every timeline alone.</p>
+            <p>This is an entertainment-only game. It does not connect to a wallet, distribute tokens, or promise financial rewards.</p>
+            <div class="game-story__actions"><a class="button button-ghost" href="/the-lore">Read the lore <span aria-hidden="true">↗</span></a><a class="button button-primary" data-official-link="pump" href="https://pump.fun/coin/4ZvfjSV39AV8X56idKU2vA2VEBktXiQ7jyNxjoACpump" target="_blank" rel="noopener noreferrer">View $PIECE <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <div class="footer-brand"><img src="/brand/logo-horizontal-dark.svg" alt="The Last Piece" width="1860" height="379" loading="lazy" /><p>The internet is searching for the final piece. The frog already ate it.</p></div>
+        <div class="footer-col"><h3>Explore</h3><nav aria-label="Footer site navigation"><a href="/#story">Story</a><a href="/#mr-piece">MR. PIECE</a><a href="/#token">Token</a><a href="/the-lore">Lore archive</a><a href="/game">Game</a><a href="/faq">FAQ</a></nav></div>
+        <div class="footer-col"><h3>Official links</h3><nav aria-label="Official project links"><a data-official-link="website" href="https://the-last-piece.vercel.app/">Website</a><a data-official-link="x" href="https://x.com/LastPieceCoinHd" target="_blank" rel="noopener noreferrer">X ↗</a><a data-official-link="telegram" href="https://t.me/thastpiece" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a data-official-link="pump" href="https://pump.fun/coin/4ZvfjSV39AV8X56idKU2vA2VEBktXiQ7jyNxjoACpump" target="_blank" rel="noopener noreferrer">Pump.fun ↗</a></nav></div>
+      </div>
+      <div class="footer-bottom"><p>$PIECE is a community-driven meme token. Crypto assets are volatile. Always do your own research and never spend more than you can afford to lose.</p><p>© 2026 The Last Piece</p></div>
+    </footer>
+  </div>
+</body>
+</html>
