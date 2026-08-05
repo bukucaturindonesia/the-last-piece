@@ -1,148 +1,155 @@
-const header = document.querySelector('[data-header]');
-const menuButton = document.querySelector('.menu-toggle');
-const mobileMenu = document.querySelector('.mobile-menu');
-const glow = document.querySelector('.cursor-glow');
-const heroImage = document.querySelector('.hero-image');
+(() => {
+  'use strict';
 
-const updateHeader = () => {
-  header?.classList.toggle('scrolled', window.scrollY > 28);
-};
-
-updateHeader();
-window.addEventListener('scroll', updateHeader, { passive: true });
-
-menuButton?.addEventListener('click', () => {
-  if (!mobileMenu || !header) return;
-  const open = !mobileMenu.classList.contains('open');
-  mobileMenu.classList.toggle('open', open);
-  header.classList.toggle('menu-open', open);
-  menuButton.setAttribute('aria-expanded', String(open));
-  mobileMenu.setAttribute('aria-hidden', String(!open));
-  document.body.style.overflow = open ? 'hidden' : '';
-});
-
-document.querySelectorAll('.mobile-menu a').forEach((link) => {
-  link.addEventListener('click', () => {
-    mobileMenu?.classList.remove('open');
-    header?.classList.remove('menu-open');
-    menuButton?.setAttribute('aria-expanded', 'false');
-    mobileMenu?.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+  const PROJECT = Object.freeze({
+    website: 'https://the-last-piece.vercel.app/',
+    x: 'https://x.com/LastPieceCoinHd',
+    telegram: 'https://t.me/thastpiece',
+    pump: 'https://pump.fun/coin/4ZvfjSV39AV8X56idKU2vA2VEBktXiQ7jyNxjoACpump',
+    contract: '4ZvfjSV39AV8X56idKU2vA2VEBktXiQ7jyNxjoACpump'
   });
-});
 
-const revealElements = [...document.querySelectorAll('.reveal:not(.is-visible)')];
+  document.querySelectorAll('[data-official-link]').forEach((link) => {
+    const key = link.getAttribute('data-official-link');
+    const href = key ? PROJECT[key] : null;
+    if (href) link.setAttribute('href', href);
+  });
 
-if ('IntersectionObserver' in window && revealElements.length > 0) {
-  document.documentElement.classList.add('motion-ready');
+  document.querySelectorAll('[data-contract]').forEach((node) => {
+    node.textContent = PROJECT.contract;
+  });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  const header = document.querySelector('[data-header]');
+  const menuButton = document.querySelector('.menu-toggle');
+  const mobilePanel = document.querySelector('.mobile-panel');
 
-  revealElements.forEach((element) => observer.observe(element));
+  const getMenuFocusables = () => {
+    if (!menuButton || !mobilePanel) return [];
+    return [menuButton, ...mobilePanel.querySelectorAll('a[href], button:not([disabled])')]
+      .filter((element) => element.getClientRects().length > 0);
+  };
 
-  // Safety fallback: never leave content hidden if the observer is interrupted.
-  window.setTimeout(() => {
-    document.querySelectorAll('.reveal:not(.is-visible)').forEach((element) => {
-      element.classList.add('is-visible');
-    });
-  }, 2400);
-}
+  const setMenuState = (open, { restoreFocus = false } = {}) => {
+    if (!menuButton || !mobilePanel) return;
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    mobilePanel.classList.toggle('is-open', open);
+    mobilePanel.setAttribute('aria-hidden', String(!open));
+    mobilePanel.toggleAttribute('inert', !open);
+    header?.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
 
-if (window.matchMedia('(pointer:fine)').matches) {
-  if (glow) {
-    glow.style.opacity = '1';
-    window.addEventListener('pointermove', (event) => {
-      glow.style.left = `${event.clientX}px`;
-      glow.style.top = `${event.clientY}px`;
-    }, { passive: true });
+    if (open) {
+      window.setTimeout(() => mobilePanel.querySelector('a[href]')?.focus(), 0);
+    } else if (restoreFocus) {
+      menuButton.focus();
+    }
+  };
+
+  mobilePanel?.setAttribute('inert', '');
+
+  menuButton?.addEventListener('click', () => {
+    setMenuState(menuButton.getAttribute('aria-expanded') !== 'true');
+  });
+
+  mobilePanel?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenuState(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    const menuOpen = menuButton?.getAttribute('aria-expanded') === 'true';
+
+    if (event.key === 'Escape' && menuOpen) {
+      event.preventDefault();
+      setMenuState(false, { restoreFocus: true });
+      return;
+    }
+
+    if (event.key !== 'Tab' || !menuOpen) return;
+    const focusables = getMenuFocusables();
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1080) setMenuState(false);
+  }, { passive: true });
+
+  const updateHeader = () => {
+    header?.classList.toggle('is-scrolled', window.scrollY > 20);
+  };
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+
+  const revealNodes = [...document.querySelectorAll('.reveal:not(.is-visible)')];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealNodes.forEach((node) => node.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+
+    revealNodes.forEach((node) => observer.observe(node));
+
+    window.setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.is-visible)').forEach((node) => node.classList.add('is-visible'));
+    }, 2800);
   }
 
-  window.addEventListener('scroll', () => {
-    if (!heroImage || window.scrollY > window.innerHeight) return;
-    heroImage.style.transform = `scale(1.035) translateY(${window.scrollY * 0.035}px)`;
-  }, { passive: true });
-}
+  const copyButtons = document.querySelectorAll('[data-copy-contract]');
 
-/* Full-screen internal route transition. */
-(() => {
-  const routeLabels = new Map([
-    ['/', 'THE LAST PIECE'],
-    ['/the-lore/', 'THE LORE'],
-    ['/the-search/', 'THE SEARCH'],
-    ['/roadmap/', 'ROADMAP'],
-    ['/faq/', 'FAQ']
-  ]);
+  const writeClipboard = async (value) => {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(value);
+      return;
+    }
 
-  const normalizePath = (path) => {
-    if (!path || path === '/') return '/';
-    return path.endsWith('/') ? path : `${path}/`;
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.append(textarea);
+    textarea.select();
+    const copied = document.execCommand('copy');
+    textarea.remove();
+    if (!copied) throw new Error('Clipboard copy failed');
   };
 
-  const loader = document.createElement('div');
-  loader.className = 'page-transition-loader';
-  loader.setAttribute('data-page-transition-loader', '');
-  loader.setAttribute('aria-hidden', 'true');
-  loader.innerHTML = `
-    <div class="page-transition-loader__scene">
-      <img class="page-transition-loader__frog" src="/assets/frog-loader.svg?v=20260804-1400" alt="" width="960" height="640" />
-      <div class="page-transition-loader__copy">
-        <span class="page-transition-loader__eyebrow">ENTERING THE NEXT CLUE</span>
-        <strong class="page-transition-loader__label" data-transition-label>THE LAST PIECE</strong>
-        <span class="page-transition-loader__bar" aria-hidden="true"></span>
-      </div>
-    </div>`;
-  document.body.append(loader);
+  copyButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const label = button.querySelector('[data-copy-label]');
+      const copyZone = button.closest('[data-copy-zone], .contract-box');
+      const status = copyZone?.querySelector('[data-copy-status]');
 
-  const labelNode = loader.querySelector('[data-transition-label]');
-  let navigating = false;
+      try {
+        await writeClipboard(PROJECT.contract);
+        if (label) label.textContent = 'Copied';
+        if (status) status.textContent = 'Full contract address copied.';
+      } catch {
+        if (label) label.textContent = 'Copy failed';
+        if (status) status.textContent = 'Copy failed. Select the address manually.';
+      }
 
-  const activate = (label) => {
-    if (labelNode) labelNode.textContent = label;
-    loader.classList.add('is-active');
-    loader.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('is-page-transitioning');
-  };
-
-  document.addEventListener('click', (event) => {
-    if (navigating || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-    const link = event.target.closest('a[href]');
-    if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
-
-    const rawHref = link.getAttribute('href');
-    if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || rawHref.startsWith('javascript:')) return;
-
-    const destination = new URL(link.href, window.location.href);
-    if (destination.origin !== window.location.origin) return;
-
-    const currentPath = normalizePath(window.location.pathname);
-    const destinationPath = normalizePath(destination.pathname);
-    if (destinationPath === currentPath && destination.hash) return;
-    if (destinationPath === currentPath && !destination.hash) return;
-
-    event.preventDefault();
-    navigating = true;
-
-    const label = routeLabels.get(destinationPath) || link.textContent.trim() || 'THE NEXT CLUE';
-    activate(label.toUpperCase());
-
-    // Long enough to feel intentional, short enough to keep navigation responsive.
-    window.setTimeout(() => {
-      window.location.assign(destination.href);
-    }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 220 : 980);
-  });
-
-  window.addEventListener('pageshow', (event) => {
-    if (!event.persisted) return;
-    navigating = false;
-    loader.classList.remove('is-active');
-    loader.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('is-page-transitioning');
+      window.setTimeout(() => {
+        if (label) label.textContent = 'Copy contract';
+        if (status) status.textContent = '';
+      }, 2600);
+    });
   });
 })();

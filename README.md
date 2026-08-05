@@ -1,20 +1,18 @@
-# The Last Piece — Premium Website
+# The Last Piece — Premium Static Website
 
-Static website ready for GitHub and Vercel.
+Static HTML/CSS/JavaScript website prepared for GitHub and Vercel.
 
 ## Deploy
-1. Upload every file in this folder to the root of a GitHub repository.
-2. Import the repository in Vercel.
-3. Select **Other** as the framework preset.
+1. Copy the changed files into the repository root while preserving paths.
+2. Commit and push to GitHub.
+3. Import or redeploy the repository in Vercel using the **Other** framework preset.
 4. Leave Build Command and Output Directory empty.
-5. Deploy.
 
-## Official-link check
-Before publishing, verify these URLs in `index.html`:
-- Telegram: `https://t.me/TheLastPieceCommunity`
+## Canonical project data
+- Website: `https://the-last-piece.vercel.app/`
 - X: `https://x.com/LastPieceCoinHd`
+- Telegram: `https://t.me/thastpiece`
+- Pump.fun: `https://pump.fun/coin/4ZvfjSV39AV8X56idKU2vA2VEBktXiQ7jyNxjoACpump`
+- Contract address: `4ZvfjSV39AV8X56idKU2vA2VEBktXiQ7jyNxjoACpump`
 
-Replace them if the final usernames differ.
-
-## Launch update
-After the token launches, replace every `COMING SOON` contract label with the verified contract address. Publish the same address simultaneously on the website, Telegram, and X.
+Canonical runtime values are centralised in `script.js` and mirrored in HTML as no-JavaScript fallbacks.
