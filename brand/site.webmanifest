@@ -1,12 +1,22 @@
 {
   "name": "The Last Piece",
-  "short_name": "$PIECE",
-  "description": "The internet is searching for the final piece. The frog already ate it.",
-  "icons": [
-    {"src": "/brand/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png"},
-    {"src": "/brand/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png"}
-  ],
-  "theme_color": "#090B0D",
+  "short_name": "Last Piece",
+  "start_url": "/",
+  "display": "standalone",
   "background_color": "#090B0D",
-  "display": "standalone"
+  "theme_color": "#090B0D",
+  "icons": [
+    {
+      "src": "/brand/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
